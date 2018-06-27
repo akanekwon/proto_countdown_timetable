@@ -6,9 +6,11 @@
 
 # 使い方
 
-- git clone git@github.com:akanekwon/proto_countdown_timetable.git
+※ 簡易的なサーバを立ち上げるため、Node.jsをインストールする必要があります。
+- Fork and clone OR Download this repositoty (https://github.com/akanekwon/proto_countdown_timetable) .
 
-- access to index.html
+- npm install
+- npm start
 
 
 ## 時刻表のフォーマット
@@ -21,4 +23,3 @@
 
 - オフラインでも時刻表が見られるようアプリケーションキャッシュに対応する
 - 現状は次の電車の出発時刻しか分からないため、時刻表自体を表示できるようにする
-- 表示する路線や路線数をアプリ上で変更可能にする

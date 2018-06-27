@@ -1,0 +1,21 @@
+{
+  "name": "proto_countdown_timetable",
+  "version": "0.0.1",
+  "description": "====",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server"  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akanekwon/proto_countdown_timetable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akanekwon/proto_countdown_timetable/issues"
+  },
+  "homepage": "https://github.com/akanekwon/proto_countdown_timetable#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
