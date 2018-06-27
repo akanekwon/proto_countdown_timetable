@@ -1,5 +1,6 @@
 //var tables = 1;
 var table = [];
+var JapaneseHolidays = JapaneseHolidays;
 
 /** */
 class TimeTable {
@@ -19,13 +20,13 @@ class TimeTable {
     // 時刻表データの見出し行を検索
     for(let i = 0, end1 = this.tt.length, asc1 = 0 <= end1; asc1 ? i < end1 : i > end1; asc1 ? i++ : i--) {
       //
-      if(this.tt[i][0] === "[平日]") {
+      if(this.tt[i][0] === '[平日]') {
         this.weekday = i + 1;
       }
-      if(this.tt[i][0] === "[土曜]") {
+      if(this.tt[i][0] === '[土曜]') {
         this.saturday = i + 1;
       }
-      if(this.tt[i][0] === "[日曜・祝日]") {
+      if(this.tt[i][0] === '[日曜・祝日]') {
         this.sunday_holiday = i + 1;
       }
     }
@@ -49,7 +50,7 @@ class TimeTable {
   // 時刻表データをXHRで読み込む
   loadTimeTable(src) {
     const Xhr = new XMLHttpRequest();
-    Xhr.open("GET", src, false);
+    Xhr.open('GET', src, false);
     Xhr.send(null);
     return Xhr.responseText;
   }
@@ -67,7 +68,7 @@ class TimeTable {
   // now以降の最初の時刻等を返す（flagがあれば前日の時刻表を検索）
   nexttime(now, flag) {
     let i;
-    let day, hh;
+    let day;
     let asc, end;
     const time = this.hhmm(now, flag);
     const next = new Date(now);
@@ -103,7 +104,7 @@ class TimeTable {
     }
 
     // 次の時刻が見つからなかった場合の処理
-    if((!this.tt[i]) || (this.tt[i][0][0] === "[")) {
+    if((!this.tt[i]) || (this.tt[i][0][0] === '[')) {
       if(flag) {
         return false;
       } else {
@@ -114,8 +115,9 @@ class TimeTable {
       }
     }
 
-    // @tt[i][0] が24時を超えていた場合は翌日の日時に修正
-    if(this.tt[i][0].substring(0, 2) > "23") {
+    // tt[i][0] が24時を超えていた場合は翌日の日時に修正
+    let hh;
+    if(this.tt[i][0].substring(0, 2) > '23') {
       hh = parseInt(this.tt[i][0].substring(0, 2), 10) - 24;
       if(!flag) {
         next.setDate(next.getDate() + 1);
@@ -127,6 +129,7 @@ class TimeTable {
     next.setHours(hh, mm, 0, 0);
 
     // 次の時刻およびtt[i]を返す
+
     return {
       time: next,
       str: this.tt[i]
@@ -139,12 +142,13 @@ const computeDuration = function(ms) {
   const h = String(Math.floor(ms / 3600000));
   const m = String(Math.floor((ms - (h * 3600000)) / 60000) + 100).substring(1);
   const s = String(Math.round((ms - (h * 3600000) - (m * 60000)) / 1000) + 100).substring(1);
-  return h + ":" + m + ":" + s;
+  return `${h}:${m}:${s}`;
 };
 
 /** */
 const dayOfTheWeek = function(day) {
   const week = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'];
+
   if(JapaneseHolidays.isHoliday(new Date(day.getFullYear(), day.getMonth() + 1, day.getDate()), true)) {
     return '(祝)';
   } else {
@@ -152,43 +156,43 @@ const dayOfTheWeek = function(day) {
   }
 };
 
-const timetest = function() {
+const updateTime = function(...arg) {
   const now = new Date();
+  // document.getElementById("now").innerHTML = `現在時刻：${now.toLocaleString()}${dayOfTheWeek(now)}`;
 
-  // document.getElementById("now").innerHTML = `出発時刻：${now.toLocaleString()}${dayOfTheWeek(now)}`;
-
-  let nt = table[0].nexttime(now, true);
+  let nt = table[0].nexttime(now, true, arg[0]);
   if(!nt) {
-    nt = table[0].nexttime(now, false);
+    nt = table[0].nexttime(now, false, arg[0]);
   }
 
-  //str[0]:時刻 str[1]:種別 str[2]:行先 str[3]:備考
-  document.getElementById(`next`).innerHTML = nt.str[0] + "発 " + nt.str[3];
-  document.getElementById(`dir`).innerHTML = nt.str[2] + " " + nt.str[1];
 
-  var duration = nt.time - now;
+  //str[0]:時刻 str[1]:種別 str[2]:行先 str[3]:備考
+  document.getElementById('next').innerHTML = `${nt.str[0]}発 ${nt.str[3]}`;
+  document.getElementById('dir').innerHTML = `${nt.str[2]} ${nt.str[1]}`;
+
+  let duration = nt.time - now;
   if(duration >= 0) {
-    const elem = document.getElementById(`dur`);
+    const elem = document.getElementById('dur');
     elem.innerHTML = `あと ${computeDuration(duration)}`;
 
     elem.style.color = (duration < 60000) && 'red' ||
       (duration < 180000) && 'orange' || 'black';
   }
 
-  return setTimeout((() => timetest()), 1000);
+  return setTimeout((() => updateTime(arg[0])), 1000);
 };
 
 
 window.addEventListener('DOMContentLoaded', function() {
   const s = document.getElementById('select');
-  //s.value = '2ban.csv';
+
   s.addEventListener('change', function(e) {
+
     table[0] = new TimeTable(e.target.value);
 
-    document.getElementById("route").innerHTML = table[0].getRoute();
-    document.getElementById("station").innerHTML = table[0].getStation();
-    document.getElementById("desc").innerHTML = table[0].getDesc();
-
-    timetest();
+    document.getElementById('route').innerHTML = table[0].getRoute();
+    document.getElementById('station').innerHTML = table[0].getStation();
+    document.getElementById('desc').innerHTML = table[0].getDesc();
+    updateTime();
   });
 });

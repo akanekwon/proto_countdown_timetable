@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div>
+  <div id="sel">
     <p>時刻表データ：
       <select id="select">
       <option value="" selected>データを選んでください</option>
       <option value="sample1.csv">sample1</option>
       <option value="sample2.csv">sample2</option>
       <option value="sample3.csv">sample3</option>
-    </select></p>
+      </select>
+    </p>
   </div>
   <div class="main">
     <div id="now" class="medium"></div>
@@ -25,7 +26,7 @@
       <div id="next" class="medium"></div>
       <div id="dir" class="medium"></div>
       <!-- <div id="type1" class="small"></div> -->
-      <p id="dur" class="large"></p>
+      <p id="dur" ></p>
     </div>
   </div>
   <script src="js/japanese-holidays.js"></script>

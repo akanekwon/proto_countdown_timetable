@@ -283,7 +283,4 @@ http://opensource.org/licenses/mit-license.php
     shunbunWithTime: shunbunWithTime,
     shubunWithTime: shubunWithTime
   };
-
 }).call(this);
-
-//# sourceMappingURL=japanese-holidays.js.map

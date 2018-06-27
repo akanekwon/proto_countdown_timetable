@@ -1,6 +1,7 @@
 body {
   /* margin: 0; */
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  font-size: 1.5em;
   background: #fff;
   text-align: center;
 }
@@ -17,7 +18,8 @@ div p {
 
 .main {
   width: 100%;
-  margin: 50px;
+  margin: 50px auto;
+  position: relative;
 }
 
 .main div {
@@ -36,9 +38,14 @@ div p {
 }
 
 .medium {
-  font-size: medium
+  font-size: 0.8em;
 }
 
 .large {
-  font-size: xx-large
+  font-size: 1.8em;
+}
+
+#dur {
+  width: 100%;
+  font-size: 2em;
 }
