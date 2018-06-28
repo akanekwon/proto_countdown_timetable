@@ -2,7 +2,7 @@
 var table = [];
 var JapaneseHolidays = JapaneseHolidays;
 
-/** */
+/** @classdesc 時刻表クラス */
 class TimeTable {
   constructor(src) {
     this.src = src;
@@ -19,7 +19,7 @@ class TimeTable {
 
     // 時刻表データの見出し行を検索
     for(let i = 0, end1 = this.tt.length, asc1 = 0 <= end1; asc1 ? i < end1 : i > end1; asc1 ? i++ : i--) {
-      //
+      // 曜日行を取得
       if(this.tt[i][0] === '[平日]') {
         this.weekday = i + 1;
       }
@@ -32,17 +32,26 @@ class TimeTable {
     }
   }
 
-  /** */
+  /**
+   * 路線名を取得する
+   * @return {string} 路線名
+   */
   getRoute() {
     return this.tt[0][0];
   }
 
-  /** */
+  /**
+   * 駅名を取得する
+   * @return {string} 駅名
+   */
   getStation() {
     return this.tt[0][1];
   }
 
-  /** */
+  /**
+   * 方面名を取得する
+   * @return {string} 方面名
+   */
   getDesc() {
     return this.tt[0][2];
   }
@@ -129,7 +138,6 @@ class TimeTable {
     next.setHours(hh, mm, 0, 0);
 
     // 次の時刻およびtt[i]を返す
-
     return {
       time: next,
       str: this.tt[i]
@@ -137,7 +145,9 @@ class TimeTable {
   }
 };
 
-/** */
+/** 残り時間を計算する
+ * @return {string} 残り時間 (h:mm:ss)
+ */
 const computeDuration = function(ms) {
   const h = String(Math.floor(ms / 3600000));
   const m = String(Math.floor((ms - (h * 3600000)) / 60000) + 100).substring(1);
@@ -145,7 +155,9 @@ const computeDuration = function(ms) {
   return `${h}:${m}:${s}`;
 };
 
-/** */
+/** 曜日名または祝日を取得する
+ * @return {string} 曜日名または祝日
+ */
 const dayOfTheWeek = function(day) {
   const week = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'];
 
