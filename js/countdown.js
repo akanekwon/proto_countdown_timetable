@@ -1,4 +1,3 @@
-//var tables = 1;
 var table = [];
 var JapaneseHolidays = JapaneseHolidays;
 
