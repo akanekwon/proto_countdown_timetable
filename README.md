@@ -7,7 +7,7 @@
 # 使い方
 
 ※ 簡易的なhttpサーバを立ち上げるため、Node.jsを事前にインストールする必要があります。
-- Fork and clone  or Download this repositoty (https://github.com/akanekwon/proto_countdown_timetable) .
+- Fork and clone  or Download this repositoty.
 
 - cd proto_countdown_timetable
 - npm install
