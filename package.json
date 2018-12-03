@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akanekwon/proto_countdown_timetable.git"
+    "url": "https://github.com/yoshifoxor/proto_countdown_timetable.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/akanekwon/proto_countdown_timetable/issues"
+    "url": "https://github.com/yoshifoxor/proto_countdown_timetable/issues"
   },
-  "homepage": "https://github.com/akanekwon/proto_countdown_timetable#readme",
+  "homepage": "https://github.com/yoshifoxor/proto_countdown_timetable#readme",
   "dependencies": {
     "http-server": "^0.11.1"
   }
