@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>proto_countdown_timetable</title>
   <link rel="stylesheet" href="main.css">
+  <script>
+    var rangevalue = 0;
+  </script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="japanese.holiday.js"></script>
 </head>
@@ -65,7 +68,11 @@
       <div id="type6" class="x-small"></div>
       <p id="dur6" class="large"></p>
     </div>
+    <input id="slider" type="range" min="0" max="180" value="0" step="1" onchange="rangevalue=value">
+    <div id="sli" class="smaller"></div>
     <div id="now" class="smaller"></div>
+    <script type="text/javascript" src="hmms.js"></script>
+    <script type="text/javascript" src="japanese.holiday.js"></script>
   </div>
 </body>
 </html>
