@@ -1,5 +1,7 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+browserSync = require 'browser-sync'
+reload = browserSync.reload
 
 # misc
 clean = require 'gulp-clean'
@@ -26,10 +28,16 @@ gulp.task 'pug', ->
     .pipe pug (pretty: true)
     .pipe gulp.dest './'
 
-gulp.task 'watch', ->
-  gulp.watch './coffee/*.coffee', gulp.task['coffee']
-  gulp.watch './sass/*.scss', gulp.task['sass']
-  gulp.watch './pug/*.pug', gulp.task['pug']
+gulp.task 'serve', ->
+  browserSync({
+    notify: false,
+    server: {
+      baseDir: ['./']
+    }
+  })
+  gulp.watch './coffee/*.coffee', gulp.task 'coffee', reload
+  gulp.watch './sass/*.scss', gulp.task 'sass', reload
+  gulp.watch './pug/*.pug', gulp.task 'pug', reload
 
 gulp.task 'clean', ->
   gulp.src './js/main.js', {read:false}
