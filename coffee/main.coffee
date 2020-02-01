@@ -57,15 +57,15 @@ class @TimeTable
       if isHoliday(now.getFullYear(), now.getMonth()+1, now.getDate(), true)
         day = 0
 
-    if ( 0 < day and day < 6 )
+    if (0 < day and day < 6)
       i = @weekday
-    if ( day is 6 )
-      i = @saturyday
-    if ( day is 0 )
+    if (day is 6)
+      i = @saturday
+    if (day is 0)
       i = @sunday_holiday
 
     for i in [i...@tt.length]
-      if ( @tt[i][0] > time )
+      if (@tt[i][0] > time)
         break
 
     # 次の時刻が見つからなかった場合の処理
