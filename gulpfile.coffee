@@ -35,7 +35,7 @@ gulp.task 'clean', ->
     .pipe clean()
   gulp.src './*.html', {read:false}
     .pipe clean()
-  gulp.src './css/hmms.css', {read:false}
+  gulp.src './css/*.css', {read:false}
     .pipe clean()
 
-gulp.task 'default', gulp.series [gulp.parallel('coffee', 'sass', 'pug')]
+gulp.task 'default', gulp.series ['clean', gulp.parallel('coffee', 'sass', 'pug')]
