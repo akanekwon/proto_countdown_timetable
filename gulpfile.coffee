@@ -1,10 +1,7 @@
+del = require 'del'
 gulp = require 'gulp'
-gutil = require 'gulp-util'
 browserSync = require 'browser-sync'
 reload = browserSync.reload
-
-# misc
-clean = require 'gulp-clean'
 
 # compilers
 terser = require 'gulp-terser'
@@ -39,12 +36,7 @@ gulp.task 'serve', ->
   gulp.watch './sass/*.scss', gulp.task 'sass', reload
   gulp.watch './pug/*.pug', gulp.task 'pug', reload
 
-gulp.task 'clean', ->
-  gulp.src './js/main.js', {read:false}
-    .pipe clean()
-  gulp.src './*.html', {read:false}
-    .pipe clean()
-  gulp.src './css/*.css', {read:false}
-    .pipe clean()
+gulp.task 'clean', (done) ->
+  del(['./js/main.js', './*.html', './css/main.css'], done)
 
 gulp.task 'default', gulp.series ['clean', gulp.parallel('coffee', 'sass', 'pug')]
