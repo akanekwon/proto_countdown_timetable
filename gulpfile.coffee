@@ -4,20 +4,21 @@ browserSync = require 'browser-sync'
 reload = browserSync.reload
 
 # compilers
-terser = require 'gulp-terser'
 coffee = require 'gulp-coffee'
 pug = require 'gulp-pug'
 sass = require 'gulp-sass'
+sourcemaps = require 'gulp-sourcemaps'
 
 gulp.task 'coffee', ->
   gulp.src './coffee/*.coffee'
     .pipe coffee()
-    .pipe terser()
     .pipe gulp.dest './js/'
 
 gulp.task 'sass', ->
   gulp.src './sass/*.scss'
     .pipe sass(outputStyle: 'expanded')
+    .pipe sourcemaps.init()
+    .pipe sourcemaps.write('.')
     .pipe gulp.dest './css/'
 
 gulp.task 'pug', ->
