@@ -7,25 +7,29 @@ clean = require 'gulp-clean'
 # compilers
 terser = require 'gulp-terser'
 coffee = require 'gulp-coffee'
+pug = require 'gulp-pug'
 
 
 gulp.task 'script', ->
-  gulp.src 'coffee/*.coffee'
+  gulp.src './coffee/*.coffee'
     .pipe coffee()
     .pipe terser()
-    .pipe gulp.dest 'js/'
+    .pipe gulp.dest './js/'
 
-gulp.task 'compile-js', () ->
-  compileFileName = 'main.js'
-  gulp.src 'js/main.js'
-    .pipe terser()
-    .pipe gulp.dest 'js/'
+
+gulp.task 'html', ->
+  gulp.src './pug/*.pug'
+    .pipe pug()
+    .pipe gulp.dest './'
 
 gulp.task 'watch', ->
-  gulp.watch 'coffee/*.coffee', gulp.task 'script'
+  gulp.watch './coffee/*.coffee', gulp.task['script']
+  gulp.watch './pug/*.pug', gulp.task['html']
 
 gulp.task 'clean', ->
-  gulp.src 'js/main.js', {read:false}
+  gulp.src './js/main.js', {read:false}
+    .pipe clean()
+  gulp.src './*.html', {read:false}
     .pipe clean()
 
-gulp.task 'default', gulp.series ['script']
+gulp.task 'default', gulp.series [gulp.parallel('script', 'html')]
