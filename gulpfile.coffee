@@ -27,8 +27,9 @@ gulp.task 'pug', ->
     .pipe gulp.dest './'
 
 gulp.task 'watch', ->
-  gulp.watch './coffee/*.coffee', gulp.task['script']
-  gulp.watch './pug/*.pug', gulp.task['html']
+  gulp.watch './coffee/*.coffee', gulp.task['coffee']
+  gulp.watch './sass/*.scss', gulp.task['sass']
+  gulp.watch './pug/*.pug', gulp.task['pug']
 
 gulp.task 'clean', ->
   gulp.src './js/main.js', {read:false}
