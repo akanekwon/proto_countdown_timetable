@@ -1,0 +1,13 @@
+{
+  "name": "proto_countdown_timetable",
+  "version": "0.0.1",
+  "repository": "https://github.com/yoshifoxor/proto_countdown_timetable.git",
+  "author": "yoshifoxor <kurmelsa5d@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "coffee --compile --output js/ coffee/"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.5.0"
+  }
+}
