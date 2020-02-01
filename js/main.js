@@ -1,5 +1,5 @@
 (function() {
-  var computeDuration;
+  var computeDuration, dayOfTheWeek;
 
   this.TimeTable = class TimeTable {
     constructor(src1) {
@@ -131,6 +131,16 @@
     return h + ':' + m + ':' + s;
   };
 
+  dayOfTheWeek = function(day) {
+    var week;
+    week = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'];
+    if (isHoliday(day.getFullYear(), day.getMonth() + 1, day.getDate(), true)) {
+      return '(祝)';
+    } else {
+      return week[day.getDay()];
+    }
+  };
+
   this.timetest = function() {
     var duration, elem, i, j, now, nt, ref;
     now = new Date();
@@ -140,7 +150,7 @@
     now.setMinutes(now.getMinutes() + (offset % 60));
     //時刻調整用
     //now.setTime(now.getTime() + 2*24*60*60*1000 + 8*60*60*1000 + 17*60*1000)
-    document.getElementById('now').innerHTML = '出発時刻：' + now.toLocaleString();
+    document.getElementById('now').innerHTML = '出発時刻：' + now.toLocaleString() + dayOfTheWeek(now);
     for (i = j = 0, ref = tables; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
       nt = this.table[i].nexttime(now, true);
       if (!nt) {
