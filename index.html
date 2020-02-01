@@ -1,34 +1,112 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>proto_countdown_timetable</title><link rel="stylesheet" href="css/main.css"></head><body><div class="main"><div class="smaller" id="now"></div><div class="smaller" id="offset">offset:0min</div><div id="box1"><div class="x-small" id="route1"></div><div class="large" id="station1"></div><div class="small" id="desc1"></div><div class="smaller" id="next1"></div><div class="x-small" id="dir1"></div><div class="xx-small" id="type1"></div><p class="large" id="dur1"></p></div><div id="box2"><div class="x-small" id="route2"></div><div class="large" id="station2"></div><div class="small" id="desc2"></div><div class="smaller" id="next2"></div><div class="x-small" id="dir2"></div><div class="xx-small" id="type2"></div><p class="large" id="dur2"></p></div><div id="box3"><div class="x-small" id="route3"></div><div class="large" id="station3"></div><div class="small" id="desc3"></div><div class="smaller" id="next3"></div><div class="x-small" id="dir3"></div><div class="xx-small" id="type3"></div><p class="large" id="dur3"></p></div><div id="box4"><div class="x-small" id="route4"></div><div class="large" id="station4"></div><div class="small" id="desc4"></div><div class="smaller" id="next4"></div><div class="x-small" id="dir4"></div><div class="xx-small" id="type4"></div><p class="large" id="dur4"></p></div><div id="box5"><div class="x-small" id="route5"></div><div class="large" id="station5"></div><div class="small" id="desc5"></div><div class="smaller" id="next5"></div><div class="x-small" id="dir5"></div><div class="xx-small" id="type5"></div><p class="large" id="dur5"></p></div><div id="box6"><div class="x-small" id="route6"></div><div class="large" id="station6"></div><div class="small" id="desc6"></div><div class="smaller" id="next6"></div><div class="x-small" id="dir6"></div><div class="xx-small" id="type6"></div><p class="large" id="dur6"></p></div><button id="minus-button" type="button" onclick="minusval()">-</button><input type="range" id="slider" min="-30" max="30" value="0" step="1" onchange="changeval(value)"><button type="button" id="plus-button" onclick="plusval()">+</button><script type="text/javascript" src="js/japanese.holiday.js"></script><script type="text/javascript" src="js/main.js"></script><script type="text/javascript"> var offset = 0;
-
- function changeval(value) {
-   offset = parseInt(value);
-   document.getElementById('slider').value = offset;
-   document.getElementById('offset').innerHTML = 'offset:' + offset + 'min';
- }
-
- function minusval() {
-   changeval(parseInt(offset) - 5);
- }
-
- function plusval() {
-   changeval(parseInt(offset) + 5);
- }
-
- window.onload = function() {
-   tables = 6;
-   table = [];
-   dirname = 'data';
-   table[0] = new TimeTable(`${dirname}/1ban.csv`);
-   table[1] = new TimeTable(`${dirname}/2ban.csv`);
-   table[2] = new TimeTable(`${dirname}/3ban.csv`);
-   table[3] = new TimeTable(`${dirname}/4ban.csv`);
-   table[4] = new TimeTable(`${dirname}/5ban.csv`);
-   table[5] = new TimeTable(`${dirname}/6ban.csv`);
-
-   for (i = 0; i < tables; i++) {
-     document.getElementById('route' + String(i + 1)).innerHTML = table[i].getRoute();
-     document.getElementById('station' + String(i + 1)).innerHTML = table[i].getStation();
-     document.getElementById('desc' + String(i + 1)).innerHTML = table[i].getDesc();
-   }
-   timetest();
- };</script></div></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>proto_countdown_timetable</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="main">
+      <div class="smaller" id="now"></div>
+      <div class="smaller" id="offset">offset:0min</div>
+      <div id="box1">
+        <div class="x-small" id="route1"></div>
+        <div class="large" id="station1"></div>
+        <div class="small" id="desc1"></div>
+        <div class="smaller" id="next1"></div>
+        <div class="x-small" id="dir1"></div>
+        <div class="xx-small" id="type1"></div>
+        <p class="large" id="dur1"></p>
+      </div>
+      <div id="box2">
+        <div class="x-small" id="route2"></div>
+        <div class="large" id="station2"></div>
+        <div class="small" id="desc2"></div>
+        <div class="smaller" id="next2"></div>
+        <div class="x-small" id="dir2"></div>
+        <div class="xx-small" id="type2"></div>
+        <p class="large" id="dur2"></p>
+      </div>
+      <div id="box3">
+        <div class="x-small" id="route3"></div>
+        <div class="large" id="station3"></div>
+        <div class="small" id="desc3"></div>
+        <div class="smaller" id="next3"></div>
+        <div class="x-small" id="dir3"></div>
+        <div class="xx-small" id="type3"></div>
+        <p class="large" id="dur3"></p>
+      </div>
+      <div id="box4">
+        <div class="x-small" id="route4"></div>
+        <div class="large" id="station4"></div>
+        <div class="small" id="desc4"></div>
+        <div class="smaller" id="next4"></div>
+        <div class="x-small" id="dir4"></div>
+        <div class="xx-small" id="type4"></div>
+        <p class="large" id="dur4"></p>
+      </div>
+      <div id="box5">
+        <div class="x-small" id="route5"></div>
+        <div class="large" id="station5"></div>
+        <div class="small" id="desc5"></div>
+        <div class="smaller" id="next5"></div>
+        <div class="x-small" id="dir5"></div>
+        <div class="xx-small" id="type5"></div>
+        <p class="large" id="dur5"></p>
+      </div>
+      <div id="box6">
+        <div class="x-small" id="route6"></div>
+        <div class="large" id="station6"></div>
+        <div class="small" id="desc6"></div>
+        <div class="smaller" id="next6"></div>
+        <div class="x-small" id="dir6"></div>
+        <div class="xx-small" id="type6"></div>
+        <p class="large" id="dur6"></p>
+      </div>
+      <button id="minus-button" type="button" onclick="minusval()">-</button>
+      <input type="range" id="slider" min="-30" max="30" value="0" step="1" onchange="changeval(value)">
+      <button type="button" id="plus-button" onclick="plusval()">+</button>
+      <script type="text/javascript" src="js/japanese.holiday.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript">
+        var offset = 0;
+        
+        function changeval(value) {
+          offset = parseInt(value);
+          document.getElementById('slider').value = offset;
+          document.getElementById('offset').innerHTML = 'offset:' + offset + 'min';
+        }
+        
+        function minusval() {
+          changeval(parseInt(offset) - 5);
+        }
+        
+        function plusval() {
+          changeval(parseInt(offset) + 5);
+        }
+        
+        window.onload = function() {
+          tables = 6;
+          table = [];
+          dirname = 'data';
+          table[0] = new TimeTable(`${dirname}/1ban.csv`);
+          table[1] = new TimeTable(`${dirname}/2ban.csv`);
+          table[2] = new TimeTable(`${dirname}/3ban.csv`);
+          table[3] = new TimeTable(`${dirname}/4ban.csv`);
+          table[4] = new TimeTable(`${dirname}/5ban.csv`);
+          table[5] = new TimeTable(`${dirname}/6ban.csv`);
+        
+          for (i = 0; i < tables; i++) {
+            document.getElementById('route' + String(i + 1)).innerHTML = table[i].getRoute();
+            document.getElementById('station' + String(i + 1)).innerHTML = table[i].getStation();
+            document.getElementById('desc' + String(i + 1)).innerHTML = table[i].getDesc();
+          }
+          timetest();
+        };
+      </script>
+    </div>
+  </body>
+</html>

@@ -19,7 +19,7 @@ gulp.task 'script', ->
 
 gulp.task 'html', ->
   gulp.src './pug/*.pug'
-    .pipe pug()
+    .pipe pug {pretty: true}
     .pipe gulp.dest './'
 
 gulp.task 'watch', ->

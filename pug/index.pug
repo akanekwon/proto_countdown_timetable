@@ -64,38 +64,38 @@ html(lang="ja")
       button(type="button", id="plus-button", onclick="plusval()") +
       script(type="text/javascript", src="js/japanese.holiday.js")
       script(type="text/javascript", src="js/main.js")
-      script(type="text/javascript")
-        |  var offset = 0;
-        |
-        |  function changeval(value) {
-        |    offset = parseInt(value);
-        |    document.getElementById('slider').value = offset;
-        |    document.getElementById('offset').innerHTML = 'offset:' + offset + 'min';
-        |  }
-        |
-        |  function minusval() {
-        |    changeval(parseInt(offset) - 5);
-        |  }
-        |
-        |  function plusval() {
-        |    changeval(parseInt(offset) + 5);
-        |  }
-        |
-        |  window.onload = function() {
-        |    tables = 6;
-        |    table = [];
-        |    dirname = 'data';
-        |    table[0] = new TimeTable(`${dirname}/1ban.csv`);
-        |    table[1] = new TimeTable(`${dirname}/2ban.csv`);
-        |    table[2] = new TimeTable(`${dirname}/3ban.csv`);
-        |    table[3] = new TimeTable(`${dirname}/4ban.csv`);
-        |    table[4] = new TimeTable(`${dirname}/5ban.csv`);
-        |    table[5] = new TimeTable(`${dirname}/6ban.csv`);
-        |
-        |    for (i = 0; i < tables; i++) {
-        |      document.getElementById('route' + String(i + 1)).innerHTML = table[i].getRoute();
-        |      document.getElementById('station' + String(i + 1)).innerHTML = table[i].getStation();
-        |      document.getElementById('desc' + String(i + 1)).innerHTML = table[i].getDesc();
-        |    }
-        |    timetest();
-        |  };
+      script(type="text/javascript").
+        var offset = 0;
+
+        function changeval(value) {
+          offset = parseInt(value);
+          document.getElementById('slider').value = offset;
+          document.getElementById('offset').innerHTML = 'offset:' + offset + 'min';
+        }
+
+        function minusval() {
+          changeval(parseInt(offset) - 5);
+        }
+
+        function plusval() {
+          changeval(parseInt(offset) + 5);
+        }
+
+        window.onload = function() {
+          tables = 6;
+          table = [];
+          dirname = 'data';
+          table[0] = new TimeTable(`${dirname}/1ban.csv`);
+          table[1] = new TimeTable(`${dirname}/2ban.csv`);
+          table[2] = new TimeTable(`${dirname}/3ban.csv`);
+          table[3] = new TimeTable(`${dirname}/4ban.csv`);
+          table[4] = new TimeTable(`${dirname}/5ban.csv`);
+          table[5] = new TimeTable(`${dirname}/6ban.csv`);
+
+          for (i = 0; i < tables; i++) {
+            document.getElementById('route' + String(i + 1)).innerHTML = table[i].getRoute();
+            document.getElementById('station' + String(i + 1)).innerHTML = table[i].getStation();
+            document.getElementById('desc' + String(i + 1)).innerHTML = table[i].getDesc();
+          }
+          timetest();
+        };
