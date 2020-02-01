@@ -18,12 +18,12 @@ gulp.task 'coffee', ->
 
 gulp.task 'sass', ->
   gulp.src './sass/*.scss'
-    .pipe sass()
+    .pipe sass(outputStyle: 'expanded')
     .pipe gulp.dest './css/'
 
 gulp.task 'pug', ->
   gulp.src './pug/*.pug'
-    .pipe pug {pretty: true}
+    .pipe pug (pretty: true)
     .pipe gulp.dest './'
 
 gulp.task 'watch', ->
